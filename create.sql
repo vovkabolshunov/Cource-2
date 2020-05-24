@@ -1,4 +1,3 @@
-  
 CREATE TABLE TotalCases (
     country VARCHAR(30) NOT NULL PRIMARY KEY
     ,total_cases INT NOT NULL REFERENCES Rank (total_cases)
