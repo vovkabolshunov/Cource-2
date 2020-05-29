@@ -23,5 +23,5 @@ CREATE TABLE Cities_Popularity(
 ALTER TABLE Cities_Popularity
 ADD CONSTRAINT city_fk FOREIGN KEY (city_name) REFERENCES Cities (city_name);
 
-ALTER TABLE Citiesopularity
+ALTER TABLE Cities_Popularity
 ADD CONSTRAINT  patient_fk FOREIGN KEY (patient_id) REFERENCES Cities1 (patient_id);
