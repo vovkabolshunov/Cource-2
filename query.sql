@@ -1,13 +1,23 @@
-select CITY_PAT, sum(PATIENT_COUNT)
-from PATIENTS_POPULARITY
-inner join CITIES1 using(patient_id) 
-GROUP BY CITY_PAT;
+CREATE TABLE Patient_Popularity(
+    patient_id NUMBER not null,
+    country_name VARCHAR2(50),
+    bd_year NUMBER,
+    CONSTRAINT PK_PATIENT_POPULARITY PRIMARY KEY (patient_id)
+);
 
-select CITY_PAT,(SUM(PATIENT_COUNT)*100)/(select SUM(PATIENT_COUNT) from PATIENTS_POPULARITY)
-from PATIENTS_POPULARITY
-inner join CITIES1 using(patient_id) 
-GROUP BY CITY_PAT;
+CREATE TABLE Cities(
+    patient_id NUMBER not null,
+    city_name VARCHAR2(50),
+    CONSTRAINT PK_CITIES PRIMARY KEY (patient_id)
+);
 
-select BD_YEAR, SUM(PATIENT_COUNT)
-from PATIENTS_POPULARITY
-GROUP BY BD_YEAR;
+CREATE TABLE States(
+    country_name VARCHAR2(50) not null,
+    CONSTRAINT PK_STATES PRIMARY KEY (country_name)
+);
+
+ALTER TABLE Patient_Popularity
+ADD CONSTRAINT  patient_fk FOREIGN KEY (patient_id) REFERENCES Cities (patient_id);
+
+ALTER TABLE Patient_Popularity
+ADD CONSTRAINT country_fk FOREIGN KEY (country_name) REFERENCES States (country_name);
