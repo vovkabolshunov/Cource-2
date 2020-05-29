@@ -1,27 +1,23 @@
-CREATE TABLE Cities1(
-    patient_id integer,
-    city_name char(30)
+CREATE TABLE Patient_Popularity(
+    patient_id NUMBER not null,
+    country_name VARCHAR2(50),
+    bd_year NUMBER,
+    CONSTRAINT PK_PATIENT_POPULARITY PRIMARY KEY (patient_id)
 );
 
-ALTER TABLE Cities1
-ADD CONSTRAINT PATIENT PRIMARY KEY (patient_id);
+CREATE TABLE Cities(
+    patient_id NUMBER not null,
+    city_name VARCHAR2(50),
+    CONSTRAINT PK_CITIES PRIMARY KEY (patient_id)
+);
 
 CREATE TABLE States(
-    state_sex char(6)
+    country_name VARCHAR2(50) not null,
+    CONSTRAINT PK_STATES PRIMARY KEY (country_name)
 );
 
-ALTER TABLE States
-ADD CONSTRAINT city_pr PRIMARY KEY (state_sex);
+ALTER TABLE Patient_Popularity
+ADD CONSTRAINT  patient_fk FOREIGN KEY (patient_id) REFERENCES Cities (patient_id);
 
-CREATE TABLE Cities_Popularity(
-    city_name char(20),
-    patient_id integer,
-    sex_name integer,
-    age_name integer
-);
-
-ALTER TABLE Cities_Popularity
-ADD CONSTRAINT city_fk FOREIGN KEY (city_name) REFERENCES Cities (city_name);
-
-ALTER TABLE Cities_Popularity
-ADD CONSTRAINT  patient_fk FOREIGN KEY (patient_id) REFERENCES Cities1 (patient_id);
+ALTER TABLE Patient_Popularity
+ADD CONSTRAINT country_fk FOREIGN KEY (country_name) REFERENCES States (country_name);
