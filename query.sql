@@ -1,23 +1,15 @@
-CREATE TABLE Patient_Popularity(
-    patient_id NUMBER not null,
-    country_name VARCHAR2(50),
-    bd_year NUMBER,
-    CONSTRAINT PK_PATIENT_POPULARITY PRIMARY KEY (patient_id)
-);
+SELECT * FROM patient_popularity
+Where patient_id IN (
+    SELECT patient_id FROM cities
+    WHERE city_name = 'Gwangju')
+    
+    
+SELECT * FROM patient_popularity
+WHERE bd_year BETWEEN '1995' AND '1999'
 
-CREATE TABLE Cities(
-    patient_id NUMBER not null,
-    city_name VARCHAR2(50),
-    CONSTRAINT PK_CITIES PRIMARY KEY (patient_id)
-);
 
-CREATE TABLE States(
-    country_name VARCHAR2(50) not null,
-    CONSTRAINT PK_STATES PRIMARY KEY (country_name)
-);
-
-ALTER TABLE Patient_Popularity
-ADD CONSTRAINT  patient_fk FOREIGN KEY (patient_id) REFERENCES Cities (patient_id);
-
-ALTER TABLE Patient_Popularity
-ADD CONSTRAINT country_fk FOREIGN KEY (country_name) REFERENCES States (country_name);
+SELECT * FROM patient_popularity
+WHERE country_name IN (
+    SELECT country_name FROM states)
+    AND patient_id IN (
+    SELECT patient_id FROM cities)
