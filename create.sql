@@ -4,14 +4,14 @@ CREATE TABLE Cities1(
 );
 
 ALTER TABLE Cities1
-ADD CONSTRAINT ... PRIMARY KEY (patient_id);
+ADD CONSTRAINT PATIENT PRIMARY KEY (patient_id);
 
 CREATE TABLE States(
     state_sex char(6)
 );
 
-ALTER TABLE Cities
-ADD CONSTRAINT city_pr PRIMARY KEY (city_name);
+ALTER TABLE States
+ADD CONSTRAINT city_pr PRIMARY KEY (state_sex);
 
 CREATE TABLE Cities_Popularity(
     city_name char(20),
